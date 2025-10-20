@@ -8,3 +8,4 @@ Do pip install request, what this does it basically install the pytorch which is
 From here down use the install ultra;ytics website:
 Now you clone the ultralytic depository and install whats needed
 What we need now is to use CLI to start using the YOLO by inputting specific commands
+The CLI is still in proccess but progrss made
