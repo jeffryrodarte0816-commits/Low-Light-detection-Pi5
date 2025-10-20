@@ -1,3 +1,10 @@
+//This is to ake the versio fro a unstable(trixie) to stable(bookworm)
+
+sudo sed -i 's/trixie/bookworm/g' etc/apt/sources.list.d/*.sources
+grep -R "Suites" /etc/apt/sources.list.d/
+
+//
+
 python3 --version
 which python 3.9
 echo "export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python" >> ~/.bashrc
