@@ -5,3 +5,6 @@ Then have the Pi 5 access the virtual environment using python, should get no er
 Then install virtual environment named "venv". 
 Do pip install setuptools numpy Cython , it should install everything
 Do pip install request, what this does it basically install the pytorch which is needed to install ultralytics
+From here down use the install ultra;ytics website:
+Now you clone the ultralytic depository and install whats needed
+What we need now is to use CLI to start using the YOLO by inputting specific commands
