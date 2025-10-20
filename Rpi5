@@ -1,1 +1,35 @@
-yo
+python3 --version
+which python 3.9
+echo "export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python" >> ~/.bashrc
+source ~/.bashrc
+
+sudo apt-get install python3-virtualenv
+sudo apt-get install python3-virtualenvwrapper
+
+echo "export WORKON_HOME=$HOME/.virtualenvs" >> ~/.bashrc
+echo "source /usr/share/virtualenvwrapper/virtualenvwrapper.h" >> ~bash/.rc
+source ~/.bashrc
+mkvirtualenv cv480 //change to pyt
+deactivate //to quit working
+workon cv480 // to work on cv480 and change to pyt
+
+
+sudo apt-get update //done
+sudo apt-get upgrade //done
+sudo apt-get install python3-pip libjpeg-dev libopenblas-dev libopenmpi-dev libomp-dev
+
+workon pyt
+
+pip3 install setuptools numpy Cython
+pipe install requests
+pip3 install torch torchvision --index-url https://download.pytorch.org/whl/cpu
+
+pip install ultralytics
+
+
+// this is to create the environment on the raspberry pi
+sudo nano /etc/apt/sources.list
+deb http://raspbian.raspberrypi.com/raspbian/ bookworm main contrib non-free rpi
+deb http://archive.raspberrypi.com/debian/ bookworm main
+
+ctrl+O,enter, ctrl+x
