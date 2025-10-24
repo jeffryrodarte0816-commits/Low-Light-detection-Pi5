@@ -9,3 +9,6 @@ From here down use the install ultra;ytics website:
 Now you clone the ultralytic depository and install whats needed
 What we need now is to use CLI to start using the YOLO by inputting specific commands
 The CLI is still in proccess but progrss made
+
+
+We can try to install the "labelImg" on another computer to automatically generate the txt file for each image. When adding images to the yolo, each image is supposed to have own text file. Thus by 
