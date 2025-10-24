@@ -11,4 +11,4 @@ What we need now is to use CLI to start using the YOLO by inputting specific com
 The CLI is still in proccess but progrss made
 
 
-We can try to install the "labelImg" on another computer to automatically generate the txt file for each image. When adding images to the yolo, each image is supposed to have own text file. Thus by 
+We can try to install the "labelImg" on another computer to automatically generate the txt file for each image. When adding images to the yolo, each image is supposed to have own text file. Thus we can install the labelImg on a computer then add the txt file along with it's corresponding pictures to the yolo.
