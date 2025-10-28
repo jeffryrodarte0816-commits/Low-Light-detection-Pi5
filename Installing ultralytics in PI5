@@ -1,4 +1,4 @@
-//This is to ake the versio fro a unstable(trixie) to stable(bookworm)
+//This is to make the version from a unstable(trixie) to stable(bookworm)
 
 sudo sed -i 's/trixie/bookworm/g' etc/apt/sources.list.d/*.sources
 grep -R "Suites" /etc/apt/sources.list.d/
