@@ -1,0 +1,6 @@
+//delete the model we have called "train" within ultralytics/runs/detect
+//make new model since we need a best.pt and last.pt which the "train" model in file did not have
+//once we make new model, make sure it has the best.pt and last.pt so that we can implement the camera to test the actual model itself
+// we use as recommended the best.pt which is in general better than last.pt to test with camera examble being using the model named "train"
+yolo predict model=/home/sunnysquad/ultralytics/runs/detect/train/weights/best.pt source=0  /// the source=0 represents for example the camera 
+// look into what source would be for whatever camera we use for project and make sure it's se to to be eual to source wit above code
