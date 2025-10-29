@@ -9,8 +9,4 @@
 8. what the above line did was change the name of the model created to be called "my_newmodel"
 9. inside the files we have now within the detection aspect of Yolo, the model named my_new_model
 10. /home/sunnysquad/ultralytics/runs/detect/my_new_model/    /// this is the directory shown in terminal
-```
-# code block
-print '3 backticks or'
-print 'indent 4 spaces'
-```
+
