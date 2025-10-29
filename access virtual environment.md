@@ -6,3 +6,7 @@ To activate ultralytics
 ```bash
 cd ultralytics 
 ```
+To deactivate venv, serves purpose of closng environment correctly before disconecting PI5
+```bash
+deactivate
+```
