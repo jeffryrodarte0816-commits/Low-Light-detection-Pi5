@@ -5,7 +5,7 @@
 ```bash
 yolo predict model=/home/sunnysquad/ultralytics/runs/detect/train/weights/best.pt source=0   //the source=0 represents for example the camera
 ```
-6. look into what source would be for whatever camera we use for project and make sure it's se to to be eual to source with above code
+6. look into what source would be for whatever camera we use for project and make sure it's set to be equal to source with above code
 7. now to make new model it is
 ```bash
 yolo train model=yolo11n.pt data=/home/sunnysquad/ultralytics/datasets/coco8.yaml epochs=100 lr0=0.01 name=my_new_model
