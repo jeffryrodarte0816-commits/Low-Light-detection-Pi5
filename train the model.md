@@ -31,3 +31,8 @@ Under is how to play live feed of 1080 P knowing that video0 is main video strea
 ```bash
 ffplay /dev/video0
 ```
+If camera shows up with video0 then try running the model on the video0
+```bash
+yolo detect predict model=/home/sunnysquad/ultralytics/runs/detect/test_camera/weights/best.pt source=0 show=True
+```
+What this should do is show the camera along with objects w/label and show in terminal the # of objects w/label as well  
