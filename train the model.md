@@ -47,5 +47,21 @@ epochs=50 \
 imgsz=640
 ```
 What this does is runs the "test_camera" again, updates the best.pt and last.pt from training the model  
-
+Lastly, to retest the model do:
+```bash
+yolo detect predict model=/home/sunnysquad/ultralytics/runs/detect/test_camera/weights/best.pt source=0 show=True
+```
+This should show like explained before the model operating w/camera
+# To see beeter results, do this for training
+1. collect new data
+2.  fixed the wrong labels
+3.   add new classes, if only humans then add like dog/cat
+4. fine tune the best.pt, for example:
+```bash
+yolo train \
+model=/home/sunnysquad/ultralytics/runs/detect/test_camera/weights/best.pt \
+data=/home/sunnysquad/ultralytics/datasets/coco8.yaml \
+epochs=50 \
+imgsz=640
+```
 
