@@ -24,3 +24,9 @@ To force the camera to stop operating
 ```bash
 ctrl+C
 ```
+The "anything.yaml" represents the dataset configuration file  
+For example:
+```bash
+/home/sunnysquad/ultralytics/datasets/coco8.yaml
+```
+This means that coco8.yaml is the congifuration file that contains train images, val images, # of classes, class names
