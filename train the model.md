@@ -56,7 +56,8 @@ This should show like explained before the model operating w/camera
 1. collect new data
 2.  fixed the wrong labels
 3.   add new classes, if only humans then add like dog/cat
-4. fine tune the best.pt, for example:
+4. fine tune the best.pt,meaning using best.pt as starting point  
+For example:
 ```bash
 yolo train \
 model=/home/sunnysquad/ultralytics/runs/detect/test_camera/weights/best.pt \
