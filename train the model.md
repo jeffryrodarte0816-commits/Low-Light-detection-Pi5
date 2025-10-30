@@ -52,7 +52,7 @@ Lastly, to retest the model do:
 yolo detect predict model=/home/sunnysquad/ultralytics/runs/detect/test_camera/weights/best.pt source=0 show=True
 ```
 This should show like explained before the model operating w/camera
-# To see beeter results, do this for training
+# To see better results, do this for training
 1. collect new data
 2.  fixed the wrong labels
 3.   add new classes, if only humans then add like dog/cat
