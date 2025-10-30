@@ -19,4 +19,8 @@ using cpu due to the fact we are using the PI hardware
 ```bash
 yolo train model=yolo11n.pt data=path/to/data.yaml imgsz=640 batch=8 epochs=100 device=cpu name=new_test
 ```
-example above of how training the model would be with the paramaters used
+example above of how training the model would be with the paramaters used  
+To force the camera to stop operating
+```bash
+ctrl+C
+```
