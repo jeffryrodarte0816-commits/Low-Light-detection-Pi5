@@ -36,3 +36,16 @@ If camera shows up with video0 then try running the model on the video0
 yolo detect predict model=/home/sunnysquad/ultralytics/runs/detect/test_camera/weights/best.pt source=0 show=True
 ```
 What this should do is show the camera along with objects w/label and show in terminal the # of objects w/label as well  
+# To Continue training a model
+1.Add training images along with it's corresponding txt file  
+2.Continue to train the model you are working with for example using the model "test_camera" we do  
+```bash
+yolo train \
+model=/home/sunnysquad/ultralytics/runs/detect/test_camera/weights/best.pt \
+data=/home/sunnysquad/ultralytics/datasets/coco8.yaml \
+epochs=50 \
+imgsz=640
+```
+What this does is runs the "test_camera" again, updates the best.pt and last.pt from training the model  
+
+
