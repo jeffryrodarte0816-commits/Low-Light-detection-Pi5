@@ -65,4 +65,5 @@ data=/home/sunnysquad/ultralytics/datasets/coco8.yaml \
 epochs=50 \
 imgsz=640
 ```
+# Making model for Instance segmentation
 
