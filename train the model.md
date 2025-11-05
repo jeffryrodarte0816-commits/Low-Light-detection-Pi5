@@ -1,4 +1,4 @@
-# Making a model
+# Making a model for Object detection
 1. make new model since we need a best.pt and last.pt which the "train" model in file did not have
 2. once we make new model, make sure it has the best.pt and last.pt so that we can implement the camera to test the actual model itself
 3. we use as recommended the best.pt which is in general better than last.pt to test with camera examble being using the model named "train"
