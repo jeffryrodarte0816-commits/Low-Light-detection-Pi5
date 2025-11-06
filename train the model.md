@@ -1,18 +1,19 @@
 # Making a model for Object detection
+## For regular camera
 1. make new model since we need a best.pt and last.pt which the "train" model in file did not have
 2. once we make new model, make sure it has the best.pt and last.pt so that we can implement the camera to test the actual model itself
 3. now to make new model it is
 ```bash
-yolo train model=yolo11n.pt data=/home/sunnysquad/ultralytics/datasets/coco8.yaml epochs=100 lr0=0.01 name=my_new_model
+yolo train model=yolo11n.pt data=/home/sunnysquad/yolo_project/ultralytics/cfg/datasets/coco8.yaml epochs=100 lr0=0.01 name=my_new_model
 ```
 4. what the above line did was change the name of the model created to be called "my_newmodel"
 5. inside the files we have now within the detection aspect of Yolo, the model named my_new_model
 ```bash
- /home/sunnysquad/ultralytics/runs/detect/my_new_model/    /// this is the directory shown in terminal
+ /home/sunnysquad/yolo_project/ultralytics/runs/detect/test_regcamera2    /// this is the directory shown in terminal
 ```
 6. we use as recommended the best.pt which is in general better than last.pt to test with camera examble being using the model named "train"
 ```bash
-yolo predict model=/home/sunnysquad/ultralytics/runs/detect/my_new_model/weights/best.pt source=0   //the source=0 represents for example the camera
+yolo predict model=/home/sunnysquad/yolo_project/ultralytics/runs/detect/test_regcamera2/weights/best.pt source=0   //the source=0 represents for example the camera
 ```
 
 # Configuring camera connection to YOLO
