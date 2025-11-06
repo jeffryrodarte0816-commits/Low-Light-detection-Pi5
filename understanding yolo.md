@@ -30,3 +30,5 @@ For example:
 /home/sunnysquad/ultralytics/datasets/coco8.yaml
 ```
 This means that coco8.yaml is the congifuration file that contains train images, val images, # of classes, class names
+## type of yolo
+we are using predict, not detect predict since predict includes everything for detection, while detect predict does not include the mesh in which we need the mesh for the sensors.
