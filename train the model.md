@@ -13,7 +13,7 @@ yolo train model=yolo11n.pt data=/home/sunnysquad/yolo_project/ultralytics/cfg/d
 ```
 6. we use as recommended the best.pt which is in general better than last.pt to test with camera examble being using the model named "train"
 ```bash
-yolo predict model=/home/sunnysquad/yolo_project/ultralytics/runs/detect/test_regcamera2/weights/best.pt source=0   //the source=0 represents for example the camera
+yolo predict model=/home/sunnysquad/yolo_project/ultralytics/runs/detect/test_regcamera2/weights/best.pt source=0 show=True  //the source=0 represents for example the camera
 ```
 
 # Configuring camera connection to YOLO
