@@ -31,4 +31,7 @@ For example:
 ```
 This means that coco8.yaml is the congifuration file that contains train images, val images, # of classes, class names
 ## type of yolo
-we are using predict, not detect predict since predict includes everything for detection, while detect predict does not include the mesh in which we need the mesh for the sensors.
+### predict
+this mode of yolo is meant for everything in detection including the mesh, thus we use this when using the sensors since we want the mesh to be included, also to make sure the dataset used for the model is for segmentation, not just a regular dataset for the mesh will not show
+### detect predict
+this type of mode for yolo does not include mesh, only is for detection with box and label
