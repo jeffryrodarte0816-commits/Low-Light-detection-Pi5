@@ -4,4 +4,4 @@ Run the Instance segmentation model- use predict where mask is used to different
 ## LIDAR 
 Just be used for information based so nothing image based, will be used for autonomous driving and if necessary in conjunction with sensor that's necessary.
 ## Day/Night Camera
-Pose estimation model and detection model only for day/night, possibly run as well the Oriented Bounding boxes(OBB) model since it's more for top-view camera(maybe not applicable towards rover from ground). 
+Pose estimation model and detection model only for day/night, possibly not run the Oriented Bounding boxes(OBB) model since it's more for top-view camera(maybe not applicable towards rover from ground).
