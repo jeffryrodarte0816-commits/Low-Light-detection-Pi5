@@ -8,6 +8,7 @@ python --version
 ```bash
 nvidia-smi
 ```
+At the moment: python-3.10.12, CUDA version: 12.6  
 Now go to website for quickstart for ultralytics and place parameters needed for installation, install "pip" since we do have CUDA for the jetson.  
 ```bash
 sudo apt install python3-pip
