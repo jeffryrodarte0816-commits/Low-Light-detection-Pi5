@@ -27,11 +27,8 @@ To deactivate venv once done whatever task:
 deactivate
 ```
 
-Now install pytorch version meeting specs that you have on jetson orin nano, in our case its:
-```bash
-pip3 install torch torchvision --index-url https://download.pytorch.org/whl/cu126
-```
-After installing pytorch, install ultralytics:  
+Once installed the pytorch and torchvision(gave a hassle),then install ultralytics:
 ```bash
 pip install ultralytics
 ```
+
