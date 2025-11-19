@@ -30,3 +30,7 @@ Now install pytorch version meeting specs that you have on jetson orin nano, in 
 ```bash
 pip3 install torch torchvision --index-url https://download.pytorch.org/whl/cu126
 ```
+After installing pytorch, install ultralytics:  
+```bash
+pip install ultralytics
+```
