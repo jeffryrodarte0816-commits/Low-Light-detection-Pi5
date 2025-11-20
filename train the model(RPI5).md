@@ -15,11 +15,11 @@ yolo settings
 Will show the direcotry under the "datasets/dir", which shows where the dataset is downloaded for the images and labels after you run the yaml for like the coco8.yaml.  
 5. inside the files we have now within the detection aspect of Yolo, the model named my_new_model
 ```bash
- /home/sunnysquad/yolo_project/ultralytics/runs/detect/test_regcamera2    /// this is the directory shown in terminal
+ /home/sunnysquad/yolo_project/ultralytics/runs/detect/test_camera    /// this is the directory shown in terminal
 ```
 6. we use as recommended the best.pt which is in general better than last.pt to test with camera examble being using the model named "train"
 ```bash
-yolo predict model=/home/sunnysquad/yolo_project/ultralytics/runs/detect/test_regcamera2/weights/best.pt source=0 show=True  //the source=0 represents for example the camera
+yolo predict model=/home/sunnysquad/yolo_project/ultralytics/runs/detect/test_camera/weights/best.pt source=0 show=True  //the source=0 represents for example the camera
 ```
 
 # Configuring camera connection to YOLO
