@@ -48,13 +48,13 @@ What this should do is show the camera along with objects w/label and show in te
 1.Add training images along with it's corresponding txt file  
 2.Continue to train the model you are working with for example using the model "test_camera" we do  
 ```bash
-yolo train   model=/home/sunnysquad/yolo_project/ultralytics/runs/detect/test_regcamera2/weights/best.pt   data=/home/sunnysquad/yolo_project/ultralytics/cfg/datasets/coco8.yaml   epochs=10   imgsz=640   project=/home/sunnysquad/yolo_project/ultralytics/runs/detect   name=test_regcamera2   exist_ok=True
+yolo train   model=/home/sunnysquad/yolo_project/ultralytics/runs/detect/test_camera/weights/best.pt   data=/home/sunnysquad/yolo_project/ultralytics/cfg/datasets/coco8.yaml   epochs=10   imgsz=640   project=/home/sunnysquad/yolo_project/ultralytics/runs/detect   name=test_camera   exist_ok=True
 
 ```
 What this does is runs the "test_camera" again, updates the best.pt and last.pt from training the model  
 Lastly, to retest the model do:
 ```bash
-yolo predict model=/home/sunnysquad/yolo_project/ultralytics/runs/detect/test_regcamera2/weights/best.pt source=0 show=True
+yolo predict model=/home/sunnysquad/yolo_project/ultralytics/runs/detect/test_camera/weights/best.pt source=0 show=True
 ```
 This should show like explained before the model operating w/camera
 # To see better results, do this for training
