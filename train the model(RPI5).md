@@ -6,8 +6,8 @@
 ```bash
 yolo train model=yolo11n.pt data=/home/sunnysquad/yolo_project/ultralytics/cfg/datasets/coco8.yaml epochs=100 lr0=0.01 name=my_new_model
 ```
-4. what the above line did was change the name of the model created to be called "my_newmodel", depending on the directory you are in, the yolon11.pt is installed in that folder.    
-For example if under ultralytics, then the yolov11n.pt is installed under ultralytics folder, and the dataset downloaded for labels and images is installed in the directory configured for yolo.    
+4. what the above line did was change the name of the model created to be called "my_newmodel", depending on the directory you are in, the yolon11.pt is installed in that folder.  
+For example if under ultralytics, then the yolov11n.pt is installed under ultralytics folder, and the dataset downloaded for labels and images is installed in the directory configured for yolo.  
 Thus doing
 ```bash
 yolo settings
