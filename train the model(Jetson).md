@@ -1,7 +1,7 @@
 # Tran model with Jetson
 Make sure you are within wanted folder so that the model is installed within the desired folder
 ```bash
- yolo train model=yolo11n.pt data=coco8.yaml epochs=10 imgsz=640 batch=4 workers=2 device=0 name=test_camera
+ yolo train model=yolo11n.pt data=/home/sunnysquad/yolo_project/ultralytics/cfg/datasets/coco8.yaml epochs=10 imgsz=640 batch=2 workers=0 device=0 name=test_camera
 ```
 This model thats trained does not go into ultralytics since it was installed in home folder  
 Now we test the model:
