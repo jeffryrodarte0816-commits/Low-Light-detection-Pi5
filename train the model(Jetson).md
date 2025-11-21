@@ -1,4 +1,4 @@
-# Tran model with Jetson
+# Train model with Jetson
 Thus we 
 Make sure you are within wanted folder so that the model is installed within the desired folder: Thus we "cd" into the ultralytics folder to have yolov11n.pt installed in there.  
 Also check the yolo settings to have the runs and datasets pe placed where wanted:
