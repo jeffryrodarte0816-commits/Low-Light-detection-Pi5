@@ -6,6 +6,12 @@ https://www.youtube.com/watch?v=OSoMSVry-8E
 
 Using the Hypersen github for this specific lidar sensor, we are not able to run the demo nor the software on the RPI5 due to the incompatibility being the "libhps3d.so" file used to run the program is formatted for x86-64 Intel/AMD while our RPI5 is aarch64(ARM64) thus we need to find a SDK that is compatible with the ARM64. Same can be said for Jetson Orin Nano for the architecture is ARM64.
 
+To make sure the lidar is connected run:  
+```bash
+lsusb
+```
+should display: "ID 0483:5740 STMicroelectronics Virtual COM Port"
+
 ## First task- Get offical SDK clone and test
 ```bash
 sudo apt-get update
