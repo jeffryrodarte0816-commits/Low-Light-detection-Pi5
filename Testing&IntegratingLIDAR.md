@@ -25,7 +25,7 @@ sudo ./app
 Once above code is implemented, test and see if terminal displays "Distance: 1250 mm | Signal Strength: 2400".  
 Check that make works and that whats cloned is for 64 bit not 32 bit, if installed for wrong arch., make the file point towards the arch64 (look into the line where it says cd rasperry demo). If 64 bit arch not available, might need to configure rpi5 to me on 32-bit, not ideal tho.  
 ### Results
-Lidar worked with tested code, had to recompile a new file due to architecture was for pc and not rpi5, thus lidar proves that it works, now need to implement this with the sensors together, need to figure out how to implement this with cameras.
+Lidar worked with demo code provided by the SDK(Software Developer Kit) provided by Hypersen, had to recompile a new file due to architecture was for pc and not rpi5, thus lidar proves that it works, now need to implement this with the sensors together, need to figure out how to implement this with cameras.
 
 ## Second task- Integrate ROS2 for rover to use sensor once lidar is already tested with code functioning as intended
 
