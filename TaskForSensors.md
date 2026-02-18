@@ -6,6 +6,14 @@ Just be used for information based so nothing image based, will be used for auto
 Need to do: Talk to jeffry in regards to lidar and ros working together, along with lidar to be used with both cameras. Focus on the camera fusion, then try to apply lidar.
 ## Day/Night Camera
 Pose estimation model and detection model only for day/night, possibly not run the Oriented Bounding boxes(OBB) model since it's more for top-view camera(maybe not applicable towards rover from ground).
+# Sensor alignment (Arducam Day/Night vertically aligned above the TopDon tc001)
+If you mount them vertically (Arducam on top, Topdon on bottom, for example), your calibration process becomes easier:  
+Lock the X-Axis: In the Python script, your saved_x (horizontal shift) should be almost exactly 0 (or whatever centers the image). You generally won't need to touch this again.  
+Tune the Y-Axis: You only have to worry about saved_y.  
+The "Sweet Spot": Calibrate the saved_y variable using an object at your average target distance (e.g., 3 meters).  
+Anything closer than 3m will look slightly misaligned vertically (ghost image appears lower).  
+Anything further than 3m will look slightly misaligned vertically (ghost image appears higher).  
+But in both cases, the Left/Right alignment is perfect, so your rover tracks straight.  
 
 # Decision-Level(Late) fusion for both cameras  
 Purpose: To best get results via accuracy, We are going to run YOLO models independently on both cameras  
