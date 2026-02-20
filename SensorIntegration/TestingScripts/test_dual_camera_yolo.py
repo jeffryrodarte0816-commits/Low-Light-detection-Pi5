@@ -54,8 +54,8 @@ THERM_HEIGHT = 192
 # Display window sizes
 VIS_DISP_WIDTH    = 640
 VIS_DISP_HEIGHT   = 480
-THERM_DISP_WIDTH  = 512   # 2× upscale so thermal is easier to see
-THERM_DISP_HEIGHT = 384
+THERM_DISP_WIDTH  = 420   # 2× upscale so thermal is easier to see
+THERM_DISP_HEIGHT = 560
 
 # ─────────────────────────────────────────────────────────────────
 # YOLO SETTINGS
