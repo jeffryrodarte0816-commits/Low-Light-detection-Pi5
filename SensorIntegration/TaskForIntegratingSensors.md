@@ -17,6 +17,7 @@ But in both cases, the Left/Right alignment is perfect, so your rover tracks str
 
 # Decision-Level(Late) fusion for both cameras  
 Purpose: To best get results via accuracy, We are going to run YOLO models independently on both cameras  
+Also to have a window of thermal image, day/night image and overlap image displayed, so it will be 3 different windows to visualize the differences.  
 Step 1: Pre-process the Thermal Feed  
 Step 2: The "Overlap" Logic (Intersection over Union)  
 
