@@ -14,8 +14,10 @@ The "Sweet Spot": Calibrate the saved_y variable using an object at your average
 Anything closer than 3m will look slightly misaligned vertically (ghost image appears lower).  
 Anything further than 3m will look slightly misaligned vertically (ghost image appears higher).  
 But in both cases, the Left/Right alignment is perfect, so your rover tracks straight.  
-
-# Decision-Level(Late) fusion for both cameras to overlap  
+# Stages of fusion
+Stage 1: Decision-level(late) fusion for 2d world of image overlap with cameras  
+Stage 2: Frustrum-based fusion for 3d world implementing the Decision-level(late) fusion with a Lidar converting a 2d to 3d world
+# Stage 1:Decision-Level(Late) fusion for both cameras to overlap  
 Purpose: To best get results via accuracy, We are going to run YOLO models independently on both cameras  
 Also to have a window of thermal image, day/night image and overlap image displayed, so it will be 3 different windows to visualize the differences.  
 Step 1: Pre-process the Thermal Feed  
