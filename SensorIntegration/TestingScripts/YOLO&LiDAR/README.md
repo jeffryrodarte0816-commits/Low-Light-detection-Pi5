@@ -4,4 +4,4 @@ Once the ImageOverlap testing scripts work as intented, then we update that code
 2. Detection	"fusion_decision.py"-Finds the animal and aligns Thermal + Visual.
 3. Fusion	"lidar_fusion_node.py"-Takes the 2D "Fused Box" and calculates the 3D Distance.
 
-If these scripts work as intented, then copy these python scripts and paste onto the frustrum-based fusion folder
+If these scripts work as intented, then copy these python scripts and paste onto the frustrum-based fusion folder since this is frustrum-based fusion(3d world)
