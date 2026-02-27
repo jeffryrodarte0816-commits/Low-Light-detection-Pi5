@@ -105,26 +105,39 @@ def open_camera(index, width, height):
 def auto_detect_cameras():
     print("🔍 Scanning cameras...")
     vis_cap = therm_cap = None
-    for i in range(6):
+    vis_idx = therm_idx = -1
+    for i in range(10): # Increased range just in case
         cap = cv2.VideoCapture(i, cv2.CAP_V4L2)
         if not cap.isOpened():
             cap.release()
             continue
+            
         w = cap.get(cv2.CAP_PROP_FRAME_WIDTH)
         h = cap.get(cv2.CAP_PROP_FRAME_HEIGHT)
         print(f"  /dev/video{i}: {int(w)}x{int(h)}")
-        if w == 256 and h == 192 and therm_cap is None:
-            print(f"    ✅ TOPDON TC001 → video{i}")
+        
+        # TOPDON TC001 detection (Allowing for the 384 height quirk)
+        if w == 256 and (h == 192 or h == 384) and therm_cap is None:
+            print(f"    ✅ TOPDON TC001 detected at video{i}")
+            # Force to YUYV and 192 height
+            cap.set(cv2.CAP_PROP_FOURCC, cv2.VideoWriter_fourcc(*'YUYV'))
+            cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 192)
             therm_cap = cap
-        elif w > 640 and vis_cap is None:
-            print(f"    ✅ Arducam B0506 → video{i}")
+            therm_idx = i
+            
+        # Arducam B0506 detection (Catching it at 640 or 1920)
+        elif w >= 640 and vis_cap is None:
+            print(f"    ✅ Arducam B0506 detected at video{i}")
+            # Force to MJPEG and Full HD
+            cap.set(cv2.CAP_PROP_FOURCC, cv2.VideoWriter_fourcc(*'MJPG'))
+            cap.set(cv2.CAP_PROP_FRAME_WIDTH, VIS_WIDTH)
+            cap.set(cv2.CAP_PROP_FRAME_HEIGHT, VIS_HEIGHT)
             vis_cap = cap
-            vis_cap.set(cv2.CAP_PROP_FRAME_WIDTH,  VIS_WIDTH)
-            vis_cap.set(cv2.CAP_PROP_FRAME_HEIGHT, VIS_HEIGHT)
+            vis_idx = i
         else:
             cap.release()
-    return vis_cap, therm_cap
-
+            
+    return vis_cap, therm_cap, vis_idx, therm_idx
 
 def compute_iou(boxA, boxB):
     """
