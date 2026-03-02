@@ -3,7 +3,7 @@ dual_camera_yolo.py
 ===================
 Runs YOLO independently on both cameras simultaneously.
 No sensor fusion — each camera gets its own window and its own inference.
-
+USB facing me,the ports on left side, thermal usb on top and bottom is the day/night cam usb
 Windows:
     "YOLO | Arducam B0506"   — visual camera detections
     "YOLO | TOPDON TC001"    — thermal camera detections (with colormap)
