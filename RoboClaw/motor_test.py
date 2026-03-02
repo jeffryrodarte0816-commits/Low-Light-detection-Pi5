@@ -1,3 +1,21 @@
+"""
+Since the front and back wheels on each side are linked to the same motor channel, your wiring should look like this:
+
+Left Side: Connect both left-side motors in parallel to the M1A and M1B terminals.
+
+Right Side: Connect both right-side motors in parallel to the M2A and M2B terminals.
+
+Setting the Correct Spin:
+
+Command: Forward
+Goal: Both sides spin to move the rover forward.
+Fix: If the left side spins backward, swap the wires on M1A/M1B. If the right side spins backward, swap the wires on M2A/M2B.
+
+Command: Turn Right
+Goal: The robot should rotate clockwise.
+Action: In Mixed Mode, the RoboClaw automatically sends the Left side (M1) forward and the Right side (M2) backward.
+"""
+
 import serial
 import time
 
