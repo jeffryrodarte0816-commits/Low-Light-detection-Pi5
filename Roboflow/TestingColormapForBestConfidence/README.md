@@ -10,3 +10,8 @@ TWILIGHT    0.785581
 PINK    0.829959
 VIRIDIS    0.717258
 JET        0.702301
+
+# Task to complete
+Already completed testing ultralytics example coco8_grayscale.yaml which I made a model and trained it, ran the model onto the ConfidenceComparisonColormap.py and resulted in colormap_PINK giving best confidence so theoretically PINK is best colormap for thermal in terms of using YOLO for detection.  
+Need now to test dataset for this specific project, using only grayscale images, test colormaps with those grayscale images and see if best colormap would be different.  
+If the PINK results in best colormap for our dataset, then colormap = PINK for fusion_decision.py and calibrate_offset.py within the SensorIntegration folder.  
