@@ -1,4 +1,5 @@
 """
+motor_testv2.py
 M1 moves backwards and then immediatly after the M2 moves backwards
 """
 
