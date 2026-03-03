@@ -1,4 +1,6 @@
 """
+motor_test.py
+
 Since the front and back wheels on each side are linked to the same motor channel, your wiring should look like this:
 
 Left Side: Connect both left-side motors in parallel to the M1A and M1B terminals.
