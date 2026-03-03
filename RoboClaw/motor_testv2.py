@@ -1,3 +1,7 @@
+"""
+M1 moves backwards and then immediatly after the M2 moves backwards
+"""
+
 import serial
 import time
 
