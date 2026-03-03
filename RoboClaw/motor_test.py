@@ -7,31 +7,14 @@ Right Side: Connect both right-side motors in parallel to the M2A and M2B termin
 
 Setting the Correct Spin:
 
-Command: Forward
-Goal: Both sides spin to move the rover forward.
-Fix: If the left side spins backward, swap the wires on M1A/M1B. If the right side spins backward, swap the wires on M2A/M2B.
-
-Command: Turn Right
-Goal: The robot should rotate clockwise.
-Action: In Mixed Mode, the RoboClaw automatically sends the Left side (M1) forward and the Right side (M2) backward.
+m1 forward and m2 forward
 """
-
 import serial
 import time
 
-# ─────────────────────────────────────────────────────────────────
-# CONFIGURATION
-# ─────────────────────────────────────────────────────────────────
-# On RPi5, GPIO UART is typically /dev/ttyAMA0
-PORT = "/dev/ttyAMA0" 
+PORT = "/dev/ttyAMA0"
 BAUD_RATE = 38400
 ADDRESS = 0x80
-
-# Mixed Mode Commands
-CMD_FWD = 8
-CMD_REV = 9
-CMD_RIGHT = 10
-CMD_LEFT = 11
 
 def crc16(data: bytes) -> int:
     crc = 0
@@ -56,20 +39,28 @@ def send_move(ser, cmd, val):
 def main():
     try:
         ser = serial.Serial(PORT, BAUD_RATE, timeout=1.0)
-        print(f"Connected to RoboClaw on {PORT}")
         
-        print("Moving Forward...")
-        send_move(ser, CMD_FWD, 64) # 50% speed
+        # TEST 1: LEFT SIDE ONLY
+        print("--- Testing LEFT SIDE (M1) ---")
+        print("Moving M1 Forward...")
+        send_move(ser, 0, 40) # Command 0 = M1 Forward
         time.sleep(2)
-        
-        print("Stopping...")
-        send_move(ser, CMD_FWD, 0)
-        
+        send_move(ser, 0, 0)  # Stop
+        print("Check: Did both left wheels move forward?")
+        time.sleep(1)
+
+        # TEST 2: RIGHT SIDE ONLY
+        print("\n--- Testing RIGHT SIDE (M2) ---")
+        print("Moving M2 Forward...")
+        send_move(ser, 4, 40) # Command 4 = M2 Forward
+        time.sleep(2)
+        send_move(ser, 4, 0)  # Stop
+        print("Check: Did both right wheels move forward?")
+
     except Exception as e:
         print(f"Error: {e}")
     finally:
-        if 'ser' in locals():
-            ser.close()
+        if 'ser' in locals(): ser.close()
 
 if __name__ == "__main__":
     main()
