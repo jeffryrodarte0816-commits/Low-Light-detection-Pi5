@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Sunny Squad — Interactive Map</title>
+  <meta name="description" content="Senior Design project with an interactive map demo." />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+  <style>
+    :root{
+      --accent:#0b76ef;
+      --muted:#6b7280;
+      --bg:#f7f9fc;
+      --card:#ffffff;
+      --radius:10px;
+      --gap:20px;
+      --max-width:1100px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      color:#111827;
+      background:var(--bg);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.4;
+    }
+
+    /* Top header / nav */
+    .topbar{
+      background:linear-gradient(90deg, rgba(11,118,239,0.08), rgba(11,118,239,0.03));
+      border-bottom:1px solid rgba(15,23,42,0.04);
+      position:sticky;
+      top:0;
+      z-index:100;
+      backdrop-filter: blur(6px);
+    }
+    .container{
+      max-width:var(--max-width);
+      margin:0 auto;
+      padding:12px 20px;
+      display:flex;
+      align-items:center;
+      gap:20px;
+      justify-content:space-between;
+    }
+    .brand{
+      display:flex;
+      gap:12px;
+      align-items:center;
+      text-decoration:none;
+      color:inherit;
+    }
+    .logo{
+      width:44px;height:44px;border-radius:8px;background:var(--accent);display:inline-flex;align-items:center;justify-content:center;color:#fff;font-weight:700;
+      box-shadow: 0 6px 18px rgba(11,118,239,0.12);
+    }
+    nav{display:flex;align-items:center;gap:8px;}
+    .nav-links{display:flex;gap:8px;align-items:center;}
+    .nav-links a{padding:8px 12px;border-radius:8px;text-decoration:none;color:var(--muted);font-weight:600;font-size:14px;}
+    .nav-links a:hover{background:rgba(11,118,239,0.06);color:var(--accent)}
+
+    /* Main hero */
+    .hero{
+      max-width:var(--max-width);
+      margin:28px auto 10px;
+      padding:28px 20px;
+      display:flex;
+      gap:20px;
+      align-items:center;
+      justify-content:space-between;
+    }
+    .hero-left{flex:1}
+    .title{font-size:28px;margin:0 0 8px}
+    .subtitle{color:var(--muted);margin:0 0 16px}
+    .cta{display:inline-flex;gap:10px}
+    .btn{
+      background:var(--accent);color:#fff;padding:10px 14px;border-radius:10px;text-decoration:none;font-weight:700;font-size:14px;box-shadow:0 6px 18px rgba(11,118,239,0.12);border:none;cursor:pointer;
+    }
+    .btn.secondary{background:transparent;color:var(--accent);border:1px solid rgba(11,118,239,0.12)}
+
+    /* Cards */
+    .card{
+      background:var(--card);
+      border-radius:var(--radius);
+      padding:16px;
+      box-shadow:0 6px 18px rgba(2,6,23,0.06);
+    }
+
+    /* Map section */
+    .map-shell{
+      max-width:var(--max-width);
+      margin:0 auto 40px;
+      padding:0 20px;
+    }
+    .map-header{
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-bottom:10px;
+    }
+    .map-title{margin:0;font-size:18px}
+    .map-sub{margin:0;color:var(--muted);font-size:13px}
+
+    /* Big main window box for the interactive map */
+    .map-window{
+      border-radius:12px;
+      overflow:hidden;
+      background:linear-gradient(180deg, rgba(11,118,239,0.06), rgba(2,6,23,0.02));
+      border:1px solid rgba(2,6,23,0.06);
+      height:560px;
+      min-height:420px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      position:relative;
+      margin-bottom:16px;
+    }
+
+    #map-container {
+      width: 100%;
+      height: 100%;
+      border-radius: 12px;
+    }
+
+    .upload-area {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 16px;
+      box-shadow: 0 6px 18px rgba(2,6,23,0.06);
+    }
+
+    footer{max-width:var(--max-width);margin:24px auto;padding:18px 20px;color:var(--muted);font-size:13px;text-align:center}
+
+    @media (max-width:800px){
+      .hero{flex-direction:column;align-items:flex-start}
+      nav{display:none}
+      .mobile-toggle{display:inline-flex}
+      .mobile-menu{display:none;position:absolute;left:0;right:0;top:64px;background:var(--card);padding:16px;box-shadow:0 8px 18px rgba(2,6,23,0.06)}
+      .mobile-menu a{display:block;padding:8px 0;border-bottom:1px solid rgba(2,6,23,0.04);text-decoration:none;color:var(--muted)}
+      .mobile-menu.open{display:block}
+    }
+    @media (min-width:801px){.mobile-toggle{display:none}}
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container" role="banner">
+      <a href="#" class="brand" aria-label="Project home">
+        <div class="logo">SS</div>
+        <div>
+          <div style="font-weight:700">Sunny Squad</div>
+          <div style="font-size:12px;color:var(--muted)">Interactive Map</div>
+        </div>
+      </a>
+
+      <nav role="navigation" aria-label="Main navigation">
+        <div class="nav-links">
+          <a href="#overview">Overview</a>
+          <a href="#map">Map</a>
+        </div>
+      </nav>
+
+      <div style="display:flex;gap:8px;align-items:center">
+        <button class="mobile-toggle" id="mobile-toggle" aria-label="Open menu" style="margin-left:8px;padding:8px;border-radius:10px;border:0;background:transparent;cursor:pointer">☰</button>
+      </div>
+    </div>
+
+    <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+      <a href="#overview">Overview</a>
+      <a href="#map">Map</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="overview">
+      <div class="hero-left">
+        <h1 class="title">Sunny Squad — GPS Image Map</h1>
+        <p class="subtitle">Upload images and view them pinned on a map at their GPS coordinates.</p>
+        <div class="cta">
+          <a href="#map" class="btn">Open Map</a>
+        </div>
+        <p style="font-size:13px;color:var(--muted);margin-top:12px">Upload an image with GPS data and it will appear on the interactive map below.</p>
+      </div>
+
+      <div style="width:380px">
+        <div class="card" style="padding:0;overflow:hidden">
+          <div style="padding:14px 16px">
+            <strong style="display:block;margin-bottom:6px">Quick Facts</strong>
+            <div style="color:var(--muted);font-size:13px">Status: Map active • GPS tracking • Leaflet.js • FastAPI backend</div>
+          </div>
+          <div style="padding:12px;display:flex;gap:8px;align-items:center;">
+            <div style="width:72px;height:72px;border-radius:8px;background:rgba(11,118,239,0.10);display:flex;align-items:center;justify-content:center;font-weight:800;color:var(--accent)">📍</div>
+            <div style="flex:1">
+              <div style="font-weight:700">Image Pins</div>
+              <div style="color:var(--muted);font-size:13px">All uploads appear on the map</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Big main window box for the interactive map -->
+    <section class="map-shell" id="map" aria-labelledby="map-title">
+      <div class="map-header">
+        <div>
+          <h2 class="map-title" id="map-title">Interactive Map</h2>
+          <p class="map-sub">Click on image pins to view details and coordinates</p>
+        </div>
+        <div style="display:flex;gap:8px;align-items:center">
+          <span style="font-size:12px;color:var(--muted)" id="image-count">0 images</span>
+        </div>
+      </div>
+
+      <div class="map-window" role="region" aria-label="Map window">
+        <div id="map-container"></div>
+      </div>
+
+      <div class="upload-area">
+        <strong>Upload New Image</strong>
+        <form id="upload-form" style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap">
+          <input type="file" id="file-input" name="file" accept="image/*" style="flex:1;min-width:200px;padding:8px;border-radius:8px;border:1px solid rgba(2,6,23,0.06)" />
+          <button type="submit" class="btn">Upload</button>
+        </form>
+        <div id="upload-status" style="font-size:13px;color:var(--muted);margin-top:8px"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © Senior Design — Sunny Squad • Interactive Map with GPS Tracking
+  </footer>
+
+  <script>
+    // Mobile menu toggle
+    const mobileToggle = document.getElementById('mobile-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    mobileToggle && mobileToggle.addEventListener('click', function(){
+      mobileMenu.classList.toggle('open');
+      mobileMenu.setAttribute('aria-hidden', !mobileMenu.classList.contains('open'));
+    });
+  </script>
+
+  <script>
+    // Leaflet map initialization
+    let map;
+    let markers = [];
+    let markerGroup;
+
+    function initMap() {
+      if (map) return;
+      const mapEl = document.getElementById('map-container');
+      if (!mapEl) return;
+
+      // Create map centered at default location
+      map = L.map('map-container').setView([37.7749, -122.4194], 13);
+
+      // Add OpenStreetMap tiles
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap contributors',
+        maxZoom: 19
+      }).addTo(map);
+
+      markerGroup = L.featureGroup().addTo(map);
+      loadImages();
+    }
+
+    function loadImages() {
+      const countEl = document.getElementById('image-count');
+      fetch('/images')
+        .then(r => r.json())
+        .then(items => {
+          markerGroup.clearLayers();
+          markers = [];
+          countEl.innerText = items.length + ' image' + (items.length !== 1 ? 's' : '');
+
+          items.forEach(img => {
+            if (img.latitude && img.longitude) {
+              const lat = parseFloat(img.latitude);
+              const lon = parseFloat(img.longitude);
+              if (!isNaN(lat) && !isNaN(lon)) {
+                addMarker(lat, lon, img);
+              }
+            }
+          });
+
+          if (markers.length > 0 && map) {
+            map.fitBounds(markerGroup.getBounds().pad(0.1));
+          }
+        })
+        .catch(e => console.error('Error loading images:', e));
+    }
+
+    function addMarker(lat, lon, imgData) {
+      const marker = L.marker([lat, lon]).addTo(markerGroup);
+      
+      let popupHtml = '<div style="text-align:center;max-width:200px">';
+      if (imgData.url) {
+        popupHtml += '<img src="' + imgData.url + '" style="width:100%;max-width:180px;border-radius:8px;margin-bottom:8px" alt="' + imgData.original_name + '" />';
+      }
+      popupHtml += '<div style="font-weight:bold;margin-bottom:4px">' + imgData.original_name + '</div>';
+      if (imgData.device_id) {
+        popupHtml += '<div style="font-size:12px;color:#666;margin-bottom:4px">' + imgData.device_id + '</div>';
+      }
+      popupHtml += '<div style="font-size:12px;color:#666">📍 ' + lat.toFixed(6) + ', ' + lon.toFixed(6) + '</div>';
+      popupHtml += '</div>';
+      
+      marker.bindPopup(popupHtml);
+      markers.push(marker);
+    }
+
+    // Upload form handler
+    document.addEventListener('DOMContentLoaded', function() {
+      initMap();
+
+      const form = document.getElementById('upload-form');
+      const fileInput = document.getElementById('file-input');
+      const status = document.getElementById('upload-status');
+
+      form && form.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        if (!fileInput.files.length) return;
+
+        const fd = new FormData();
+        fd.append('file', fileInput.files[0]);
+
+        status.innerText = 'Uploading...';
+        status.style.color = 'var(--muted)';
+
+        try {
+          const res = await fetch('/upload', { method: 'POST', body: fd });
+          if (!res.ok) throw new Error('Upload failed');
+          const data = await res.json();
+          status.innerText = '✓ ' + data.original_name + ' uploaded';
+          status.style.color = '#10b981';
+          fileInput.value = '';
+          await new Promise(r => setTimeout(r, 500));
+          loadImages();
+        } catch (err) {
+          status.innerText = '✗ Upload error: ' + err.message;
+          status.style.color = '#ef4444';
+        }
+      });
+    });
+  </script>
+</body>
+</html>

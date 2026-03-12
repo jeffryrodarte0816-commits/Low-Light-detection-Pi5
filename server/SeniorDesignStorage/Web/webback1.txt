@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Project Showcase — Senior Design</title>
+    <meta name="description" content="A clean template to showcase a project with videos, images, and evenly divided sections." />
+    <style>
+        :root{
+            --accent:#0b76ef;
+            --muted:#6b7280;
+            --bg:#f7f9fc;
+            --card:#ffffff;
+            --radius:10px;
+            --gap:20px;
+            --max-width:1100px;
+        }
+        *{box-sizing:border-box}
+        body{
+            margin:0;
+            font-family:Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+            color:#111827;
+            background:var(--bg);
+            -webkit-font-smoothing:antialiased;
+            -moz-osx-font-smoothing:grayscale;
+            line-height:1.4;
+        }
+
+        /* Top header / nav */
+        .topbar{
+            background:linear-gradient(90deg, rgba(11,118,239,0.08), rgba(11,118,239,0.03));
+            border-bottom:1px solid rgba(15,23,42,0.04);
+            position:sticky;
+            top:0;
+            z-index:100;
+            backdrop-filter: blur(6px);
+        }
+        .container{
+            max-width:var(--max-width);
+            margin:0 auto;
+            padding:12px 20px;
+            display:flex;
+            align-items:center;
+            gap:20px;
+            justify-content:space-between;
+        }
+        .brand{
+            display:flex;
+            gap:12px;
+            align-items:center;
+            text-decoration:none;
+            color:inherit;
+        }
+        .logo{
+            width:44px;height:44px;border-radius:8px;background:var(--accent);display:inline-flex;align-items:center;justify-content:center;color:#fff;font-weight:700;
+            box-shadow: 0 6px 18px rgba(11,118,239,0.12);
+        }
+        nav{display:flex;align-items:center;gap:8px;}
+        .nav-links{display:flex;gap:8px;align-items:center;}
+        .nav-links a{padding:8px 12px;border-radius:8px;text-decoration:none;color:var(--muted);font-weight:600;font-size:14px;}
+        .nav-links a:hover{background:rgba(11,118,239,0.06);color:var(--accent)}
+        /* Dropdown */
+        .dropdown{
+            position:relative;
+        }
+        .drop-btn{display:flex;gap:6px;align-items:center;cursor:pointer;padding:8px 12px;border-radius:8px;background:transparent;border:0;font-weight:600;color:var(--muted)}
+        .dropdown-menu{
+            position:absolute;top:calc(100% + 8px);left:0;min-width:200px;background:var(--card);box-shadow:0 8px 30px rgba(2,6,23,0.08);border-radius:10px;padding:8px;display:none;flex-direction:column;gap:6px;
+        }
+        .dropdown-menu a{padding:8px 10px;border-radius:8px;color:#0f1724;text-decoration:none;font-size:14px;}
+        .dropdown-menu a:hover{background:rgba(11,118,239,0.05)}
+        .dropdown.open .dropdown-menu{display:flex}
+
+        /* Main hero */
+        .hero{
+            max-width:var(--max-width);
+            margin:28px auto;
+            padding:28px 20px;
+            display:flex;
+            gap:20px;
+            align-items:center;
+            justify-content:space-between;
+        }
+        .hero-left{flex:1}
+        .title{font-size:28px;margin:0 0 8px}
+        .subtitle{color:var(--muted);margin:0 0 16px}
+        .cta{display:inline-flex;gap:10px}
+        .btn{
+            background:var(--accent);color:#fff;padding:10px 14px;border-radius:10px;text-decoration:none;font-weight:700;font-size:14px;box-shadow:0 6px 18px rgba(11,118,239,0.12)
+        }
+        .btn.secondary{background:transparent;color:var(--accent);border:1px solid rgba(11,118,239,0.12)}
+
+        /* Grid sections - equal height cards */
+        .grid{
+            max-width:var(--max-width);
+            margin:0 auto 40px;
+            padding:0 20px;
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+            gap:var(--gap);
+        }
+        .card{
+            background:var(--card);
+            border-radius:var(--radius);
+            padding:16px;
+            box-shadow:0 6px 18px rgba(2,6,23,0.06);
+            display:flex;
+            flex-direction:column;
+            justify-content:space-between;
+            min-height:220px; /* equal-ish */
+        }
+        .card h3{margin:0 0 8px;font-size:18px}
+        .card p{margin:0 0 12px;color:var(--muted);font-size:14px}
+        .media-wrap{display:grid;grid-template-columns:1fr 1fr;gap:12px;height:100%}
+        .media-wrap img, .media-wrap video{width:100%;height:100%;object-fit:cover;border-radius:8px;background:#eee}
+
+        /* Video section */
+        .video-section{display:flex;flex-direction:column;gap:12px}
+        .video-player{background:#000;border-radius:10px;overflow:hidden;position:relative}
+        .controls{display:flex;gap:8px;align-items:center;padding:8px}
+        .progress{flex:1;height:6px;background:rgba(15,23,42,0.06);border-radius:6px;overflow:hidden}
+        .progress > i{display:block;height:100%;background:var(--accent);width:0%}
+
+        /* Gallery */
+        .gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+        .gallery img{width:100%;height:120px;object-fit:cover;border-radius:8px}
+
+        /* Footer */
+        footer{max-width:var(--max-width);margin:24px auto;padding:18px 20px;color:var(--muted);font-size:13px;text-align:center}
+
+        /* Responsive */
+        @media (max-width:800px){
+            .hero{flex-direction:column;align-items:flex-start}
+            .media-wrap{grid-template-columns:1fr}
+            .gallery{grid-template-columns:repeat(2,1fr)}
+            .container{padding:12px}
+            nav{display:none} /* hide default nav on small screens */
+            .mobile-toggle{display:inline-flex}
+            .mobile-menu{display:none;position:absolute;left:0;right:0;top:64px;background:var(--card);padding:16px;box-shadow:0 8px 18px rgba(2,6,23,0.06)}
+            .mobile-menu a{display:block;padding:8px 0;border-bottom:1px solid rgba(2,6,23,0.04);text-decoration:none;color:var(--muted)}
+            .mobile-menu.open{display:block}
+        }
+        @media (min-width:801px){.mobile-toggle{display:none}}
+    </style>
+</head>
+<body>
+    <header class="topbar">
+        <div class="container" role="banner">
+            <a href="#" class="brand" aria-label="Project home">
+                <div class="logo">SD</div>
+                <div>
+                    <div style="font-weight:700">Senior Design</div>
+                    <div style="font-size:12px;color:var(--muted)">Project Showcase</div>
+                </div>
+            </a>
+
+            <nav role="navigation" aria-label="Main navigation">
+                <div class="nav-links">
+                    <a href="#overview">Overview</a>
+                    <div class="dropdown" id="dropdown-projects">
+                        <button class="drop-btn" aria-haspopup="true" aria-expanded="false">Projects ▾</button>
+                        <div class="dropdown-menu" role="menu" aria-label="Project links">
+                            <a href="#media">Media</a>
+                            <a href="#features">Features</a>
+                            <a href="#team">Team</a>
+                        </div>
+                    </div>
+                    <div class="dropdown" id="dropdown-more">
+                        <button class="drop-btn" aria-haspopup="true" aria-expanded="false">More ▾</button>
+                        <div class="dropdown-menu" role="menu" aria-label="More links">
+                            <a href="#contact">Contact</a>
+                            <a href="#docs">Docs</a>
+                        </div>
+                    </div>
+                    <a href="#contact">Contact</a>
+                </div>
+            </nav>
+
+            <div style="display:flex;gap:8px;align-items:center">
+                <button class="btn secondary" style="padding:8px 10px">Sign in</button>
+                <button class="btn">Get Demo</button>
+                <button class="mobile-toggle" id="mobile-toggle" aria-label="Open menu" style="margin-left:8px;padding:8px;border-radius:10px;border:0;background:transparent;cursor:pointer">☰</button>
+            </div>
+        </div>
+
+        <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+            <a href="#overview">Overview</a>
+            <a href="#media">Media</a>
+            <a href="#features">Features</a>
+            <a href="#team">Team</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero" id="overview">
+            <div class="hero-left">
+                <h1 class="title">Demo Project — Real-time Video & Image Showcase</h1>
+                <p class="subtitle">A simple, responsive template for presenting your Senior Design project. Include videos, galleries, and neatly divided sections.</p>
+                <div class="cta">
+                    <a href="#media" class="btn">Watch Video</a>
+                    <a href="#features" class="btn secondary">Project Features</a>
+                </div>
+                <p style="font-size:13px;color:var(--muted);margin-top:12px">Built with accessible markup and responsive layout. Customize colors and assets as needed.</p>
+            </div>
+
+            <div style="width:380px">
+                <div class="card" style="padding:0;overflow:hidden">
+                    <div style="padding:14px 16px">
+                        <strong style="display:block;margin-bottom:6px">Quick Facts</strong>
+                        <div style="color:var(--muted);font-size:13px">Team: 4 • Duration: 2 semesters • Tech: WebRTC, TensorFlow (optional)</div>
+                    </div>
+                    <div style="padding:12px;display:flex;gap:8px;align-items:center;">
+                        <img src="https://picsum.photos/seed/team/72/72" alt="Team" style="width:72px;height:72px;border-radius:8px;object-fit:cover">
+                        <div style="flex:1">
+                            <div style="font-weight:700">Live Demo</div>
+                            <div style="color:var(--muted);font-size:13px">Try the interactive video player below.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Equal divided cards -->
+        <section class="grid">
+            <article class="card" id="media" aria-labelledby="media-title">
+                <div>
+                    <h3 id="media-title">Media Playback</h3>
+                    <p>Play the project demo video. Use the controls to pause/play and scrub the timeline. The video is hosted as an example (Big Buck Bunny).</p>
+                </div>
+
+                <div class="video-section" style="margin-top:10px">
+                    <div class="video-player" id="video-box">
+                        <video id="demo-video" preload="metadata" poster="https://picsum.photos/seed/video/800/450" style="width:100%;height:220px;display:block">
+                            <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+
+                    <div class="controls" role="group" aria-label="Video controls">
+                        <button id="play-btn" aria-label="Play">►</button>
+                        <div class="progress" aria-hidden="false"><i id="progress-bar"></i></div>
+                        <div style="color:var(--muted);font-size:13px" id="time">0:00 / 0:00</div>
+                    </div>
+                </div>
+            </article>
+
+            <article class="card" id="features" aria-labelledby="features-title">
+                <div>
+                    <h3 id="features-title">Features</h3>
+                    <p>Describe core project features, performance highlights, and any ML or signal processing capabilities here.</p>
+                </div>
+                <div style="display:flex;gap:8px;margin-top:8px">
+                    <div style="flex:1;background:linear-gradient(180deg,#eef7ff,transparent);padding:10px;border-radius:8px">
+                        <strong>Realtime</strong>
+                        <div style="font-size:13px;color:var(--muted)">Low latency streaming</div>
+                    </div>
+                    <div style="flex:1;background:linear-gradient(180deg,#fff7ef,transparent);padding:10px;border-radius:8px">
+                        <strong>Analytics</strong>
+                        <div style="font-size:13px;color:var(--muted)">On-device inference</div>
+                    </div>
+                </div>
+            </article>
+
+            <article class="card" id="team" aria-labelledby="team-title">
+                <div>
+                    <h3 id="team-title">Team & Credits</h3>
+                    <p>Short bios, roles, and contact info for team members. Link to GitHub repo or documentation.</p>
+                </div>
+
+                <div style="display:flex;gap:8px;align-items:center;margin-top:10px">
+                    <img src="https://picsum.photos/seed/dev1/64/64" alt="" style="width:56px;height:56px;border-radius:10px;object-fit:cover">
+                    <div style="flex:1">
+                        <div style="font-weight:700">A. Engineer</div>
+                        <div style="font-size:13px;color:var(--muted)">Frontend & Integrations</div>
+                    </div>
+                </div>
+            </article>
+
+            <article class="card" id="gallery" aria-labelledby="gallery-title">
+                <div>
+                    <h3 id="gallery-title">Image Gallery</h3>
+                    <p>High-quality screenshots and photos from the project — click to enlarge in a lightbox (optional).</p>
+                </div>
+
+                <div class="gallery" style="margin-top:10px">
+                    <img src="https://picsum.photos/seed/pic1/400/300" alt="Screenshot 1">
+                    <img src="https://picsum.photos/seed/pic2/400/300" alt="Screenshot 2">
+                    <img src="https://picsum.photos/seed/pic3/400/300" alt="Screenshot 3">
+                </div>
+            </article>
+        </section>
+
+        <!-- More detailed section that spans full width -->
+        <section class="card" style="max-width:var(--max-width);margin:0 auto 40px;padding:20px" id="contact">
+            <h3>Contact & Next Steps</h3>
+            <p style="color:var(--muted)">Interested in collaborating, testing, or deploying? Reach out to the team or browse the repository and docs linked above.</p>
+            <div style="display:flex;gap:12px;margin-top:12px;flex-wrap:wrap">
+                <a href="#" class="btn">Request Demo</a>
+                <a href="#" class="btn secondary">Repository</a>
+                <a href="#" class="btn secondary">Documentation</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        © Senior Design — Project Showcase • Built with HTML & CSS • Demo assets from picsum.photos & w3schools
+    </footer>
+
+    <script>
+        // Dropdown toggles
+        document.querySelectorAll('.dropdown').forEach(function(dd){
+            const btn = dd.querySelector('.drop-btn');
+            btn.addEventListener('click', function(e){
+                e.stopPropagation();
+                const open = dd.classList.toggle('open');
+                btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+            });
+        });
+        // Close dropdowns when clicking outside
+        document.addEventListener('click', function(){ document.querySelectorAll('.dropdown.open').forEach(d=>{ d.classList.remove('open'); d.querySelector('.drop-btn').setAttribute('aria-expanded','false'); }) });
+
+        // Mobile menu toggle
+        const mobileToggle = document.getElementById('mobile-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileToggle && mobileToggle.addEventListener('click', function(){ mobileMenu.classList.toggle('open'); mobileMenu.setAttribute('aria-hidden', !mobileMenu.classList.contains('open')); });
+
+        // Simple custom video controls
+        const video = document.getElementById('demo-video');
+        const playBtn = document.getElementById('play-btn');
+        const progBar = document.getElementById('progress-bar');
+        const timeText = document.getElementById('time');
+
+        function formatTime(s){
+            if (isNaN(s)) return '0:00';
+            const m = Math.floor(s/60), sec = Math.floor(s%60);
+            return m + ':' + (sec<10 ? '0'+sec : sec);
+        }
+
+        video.addEventListener('loadedmetadata', ()=>{ timeText.textContent = '0:00 / ' + formatTime(video.duration); });
+        video.addEventListener('timeupdate', ()=>{
+            const pct = (video.currentTime / video.duration) * 100;
+            progBar.style.width = (isNaN(pct) ? 0 : pct) + '%';
+            timeText.textContent = formatTime(video.currentTime) + ' / ' + formatTime(video.duration);
+        });
+
+        playBtn.addEventListener('click', ()=> {
+            if (video.paused) { video.play(); playBtn.textContent = '❚❚'; }
+            else { video.pause(); playBtn.textContent = '►'; }
+        });
+
+        // Click on progress to seek
+        document.querySelectorAll('.progress').forEach(function(p){
+            p.addEventListener('click', function(e){
+                const rect = p.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const pct = x / rect.width;
+                video.currentTime = pct * video.duration;
+            });
+        });
+
+        // Basic lightbox for gallery (click enlarge)
+        document.querySelectorAll('.gallery img').forEach(img=>{
+            img.style.cursor = 'zoom-in';
+            img.addEventListener('click', ()=>{
+                const overlay = document.createElement('div');
+                overlay.style.cssText = 'position:fixed;inset:0;background:rgba(2,6,23,0.8);display:flex;align-items:center;justify-content:center;z-index:9999;';
+                const imgEl = document.createElement('img');
+                imgEl.src = img.src;
+                imgEl.style.maxWidth='90%'; imgEl.style.maxHeight='90%'; imgEl.style.borderRadius='10px';
+                overlay.appendChild(imgEl);
+                overlay.addEventListener('click', ()=>document.body.removeChild(overlay));
+                document.body.appendChild(overlay);
+            });
+        });
+    </script>
+</body>
+</html></div>

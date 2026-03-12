@@ -1,0 +1,47 @@
+version: "3.9"
+
+services:
+  mariadb:
+    image: mariadb:11
+    container_name: mariadb
+    restart: unless-stopped
+    environment:
+      MARIADB_ROOT_PASSWORD: rootpass
+      MARIADB_DATABASE: appdb
+      MARIADB_USER: appuser
+      MARIADB_PASSWORD: apppass
+    ports:
+      - "3306:3306"
+    volumes:
+      - mariadb_data:/var/lib/mysql
+
+  web:
+    build: ./SeniorDesignStorage/Web
+    container_name: web
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    depends_on:
+      - mariadb
+    environment:
+      - DATABASE_URL=mysql+pymysql://appuser:apppass@mariadb:3306/appdb
+    volumes:
+      - ./SeniorDesignStorage/Web/images:/app/images
+
+  phpmyadmin:
+    image: phpmyadmin
+    container_name: phpmyadmin
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    environment:
+      PMA_HOST: mariadb
+      PMA_PORT: 3306
+      PMA_USER: root
+      PMA_PASSWORD: rootpass
+      PMA_ABSOLUTE_URI: "https://sunny-squad.tail8d7bd8.ts.net/db/"
+    depends_on:
+      - mariadb
+
+volumes:
+  mariadb_data:

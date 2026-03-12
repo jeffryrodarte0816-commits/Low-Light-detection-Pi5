@@ -1,0 +1,7 @@
+/* Background image on the entire page of the website */
+body {
+      background-image: url(R:/SeniorDesignStorage/Web/css/styles.css); /* Adjust path as needed */
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-attachment: fixed;
+    }
