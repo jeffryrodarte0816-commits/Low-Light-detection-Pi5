@@ -1,0 +1,173 @@
+1. Update System
+First update the system packages.
+
+sudo apt update
+sudo apt upgrade -y
+
+2. Install Docker
+Install Docker using the official install script.
+
+curl -fsSL https://get.docker.com | sh
+
+Add your user to the docker group:
+sudo usermod -aG docker $USER
+
+Log out and log back in for the changes to take effect.
+
+Verify Docker installation:
+docker --version
+
+3. Install Docker Compose
+Install Docker Compose:
+
+sudo apt install docker-compose -y
+
+Verify installation:
+
+docker-compose --version
+
+4. Install Tailscale
+Tailscale allows secure remote access to the server without exposing ports to the public internet.
+Install Tailscale:
+curl -fsSL https://tailscale.com/install.sh | sh
+
+Authenticate and start Tailscale:
+sudo tailscale up
+
+Get the Tailscale IP:
+tailscale ip -4
+
+You can now access the server through the private Tailscale network.
+Example SSH connection:
+ssh username@100.x.x.x
+
+5. Project Structure
+Example server directory structure:
+server/
+│
+├── docker-compose.yml
+├── nginx.conf
+└── README.md
+
+Website files may be located in a separate directory:
+website/
+│
+├── index.html
+├── css/
+├── js/
+└── assets/
+
+6. Docker Compose Configuration
+Create a docker-compose.yml file in the server directory.
+Example configuration:
+version: "3"
+
+services:
+
+  mariadb:
+    image: mariadb:latest
+    container_name: mariadb
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: website_db
+      MYSQL_USER: webuser
+      MYSQL_PASSWORD: webpassword
+    volumes:
+      - db_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+
+  website:
+    image: nginx:latest
+    container_name: website
+    restart: always
+    ports:
+      - "80:80"
+    volumes:
+      - ../website:/usr/share/nginx/html
+
+volumes:
+  db_data:
+
+  7. Start the Server
+
+  Navigate to the server folder:
+  cd server
+  
+  Start containers:
+  docker-compose up -d
+
+  Check running containers:
+  docker ps
+
+  8. Access the Website
+  Open the website using:
+  http://SERVER_IP
+
+  Or through Tailscale:
+  http://TAILSCALE_IP
+
+  9. Access the Database
+  Login to MariaDB inside the container:
+  docker exec -it mariadb mysql -u root -p
+
+  Example SQL command:
+  SHOW DATABASES;
+
+  10. Stopping Containers
+  Stop all services:
+  docker-compose down
+
+  Restart services:
+  docker-compose up -d
+
+  11. Updating Containers
+  Pull latest images:
+  docker-compose pull
+  docker-compose up -d
+
+  Notes
+  Tailscale provides a secure way to access the server without opening ports on the router.
+  Docker containers allow easy deployment and isolation of services.
+  MariaDB stores application data for the website.
+
+  12. Making local into Public
+  
+  12.1. Tailscale Funnel (Easiest with Tailscale)
+  If your service runs locally (for example on port 80 or 3000), you can expose it publicly using Tailscale Funnel.
+
+  Enable funnel:
+  tailscale funnel 80
+
+  Example if your website runs on port 3000:
+  tailscale funnel 3000
+
+  Tailscale will generate a public HTTPS URL like:
+  https://yourdevice.ts.net
+
+  12.2. Port Forwarding (Traditional Method)
+  You expose your server through your router.
+  
+  Steps:
+  12.2.1 Find your server's local IP:
+  ip a
+  
+  Example:
+  192.168.1.45
+
+  12.2.2 Log into your router admin panel.
+  12.2.3 Add a port forward rule:
+External Port	  Internal IP	    Internal Port
+   80	          192.168.1.45	    80|
+
+
+   12.2.4 Find your public IP:
+   https://whatismyipaddress.com
+
+   Now your site is reachable:
+   http://PUBLIC_IP
+   
+  
+  
+  
